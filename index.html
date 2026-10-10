@@ -1,0 +1,1178 @@
+<!doctype html>
+<html lang="sr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CENTROGROUP platforma</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+</head><body>
+<title>CENTROGROUP platforma</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f4f3ef; --panel:#ffffff; --ink:#1b1d1f; --muted:#6b6f73; --line:#e3e1db;
+  --accent:#0f6b5c; --accent-soft:#e3f0ec; --warn:#b4541a; --warn-soft:#fbeee3;
+  --bad:#b3261e; --bad-soft:#fbe9e7; --side:#16191b; --side-ink:#d9dcd8;
+  --radius:10px; --font:"IBM Plex Sans",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#121415; --panel:#1b1e20; --ink:#e8e9e6; --muted:#9a9e9f; --line:#2b2f31;
+  --accent:#4fb39f; --accent-soft:#16302b; --warn:#e08a4f; --warn-soft:#33241a;
+  --bad:#ef7b72; --bad-soft:#3a1d1b; --side:#0c0e0f; --side-ink:#c9ccc8;}}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 var(--font)}
+.hidden{display:none!important}
+.muted{color:var(--muted)} .mono{font-family:var(--mono)} .err{color:var(--bad);min-height:1.2em}
+button{font:inherit;cursor:pointer}
+input,select,textarea{font:inherit;color:var(--ink);background:var(--panel);border:1px solid var(--line);
+  border-radius:7px;padding:7px 9px;width:100%}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--accent);outline-offset:-1px}
+label{display:block;font-size:12px;color:var(--muted);margin-bottom:10px}
+label>input,label>select,label>textarea{margin-top:4px}
+.btn{border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:7px;padding:7px 13px}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.ghost{background:transparent;color:inherit;border-color:transparent}
+.btn.small{padding:4px 9px;font-size:12px}
+.btn.danger{color:var(--bad)}
+.brand{font-weight:600;letter-spacing:.08em;display:flex;align-items:center;gap:9px;font-size:13px}
+.mark{width:14px;height:14px;border-radius:3px;background:var(--accent);display:inline-block}
+
+.login{min-height:100vh;display:grid;place-items:center;padding:16px}
+.login-card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:28px;width:min(360px,100%)}
+.login-card .btn{width:100%;margin-top:6px}
+
+.shell{display:grid;grid-template-columns:220px 1fr;min-height:100vh}
+.side{background:var(--side);color:var(--side-ink);padding:18px 12px;display:flex;flex-direction:column;gap:18px;
+  position:sticky;top:0;height:100vh}
+.side .brand{color:#fff;padding:0 8px}
+#nav{display:flex;flex-direction:column;gap:2px}
+#nav a{color:var(--side-ink);text-decoration:none;padding:8px 10px;border-radius:7px;display:flex;justify-content:space-between}
+#nav a:hover{background:#ffffff12} #nav a.on{background:#ffffff1f;color:#fff}
+#nav .badge{background:var(--accent);color:#fff;border-radius:9px;font-size:11px;padding:0 7px}
+.side-foot{margin-top:auto;font-size:12px}
+.who{padding:0 8px 8px} .who b{display:block;color:#fff;font-weight:500}
+.side .btn.ghost{color:var(--side-ink)}
+
+.main{padding:20px 26px 40px;min-width:0}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}
+.top h1{font-size:20px;font-weight:600;margin:0}
+.top-right{display:flex;gap:12px;align-items:center;font-size:12px}
+.live{font-size:12px;color:var(--accent)} .live.off{color:var(--muted)}
+.live.pulse{animation:p 1s ease}
+@keyframes p{0%{opacity:.2}100%{opacity:1}}
+
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;min-width:0}
+.card h3{margin:0 0 10px;font-size:12px;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.card.wide{grid-column:1/-1}
+.kpi{font-size:26px;font-weight:600;font-variant-numeric:tabular-nums}
+.kpi small{font-size:13px;color:var(--muted);font-weight:400}
+.kpis{display:flex;gap:22px;flex-wrap:wrap}
+.flash{animation:fl 1.2s ease}
+@keyframes fl{0%{background:var(--accent-soft)}100%{background:var(--panel)}}
+
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+th{text-align:left;font-weight:500;font-size:12px;color:var(--muted);border-bottom:1px solid var(--line);padding:7px 8px}
+td{border-bottom:1px solid var(--line);padding:7px 8px;vertical-align:top}
+td.n,th.n{text-align:right}
+tr.click{cursor:pointer} tr.click:hover td{background:var(--accent-soft)}
+.tbl-wrap{overflow-x:auto}
+.pill{display:inline-block;border-radius:10px;padding:1px 8px;font-size:11px;background:var(--line)}
+.pill.posted{background:var(--accent-soft);color:var(--accent)}
+.pill.draft{background:var(--warn-soft);color:var(--warn)}
+.pill.cancelled{background:var(--bad-soft);color:var(--bad)}
+.pill.overdue{background:var(--bad-soft);color:var(--bad)}
+.bar{display:block;height:8px;border-radius:4px;background:var(--accent);min-width:2px}
+.bars div{display:grid;grid-template-columns:110px 1fr 90px;gap:8px;align-items:center;margin:5px 0;font-size:13px}
+
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;align-items:center}
+.toolbar input,.toolbar select{width:auto}
+.kanban{display:grid;grid-template-columns:repeat(6,minmax(170px,1fr));gap:10px;overflow-x:auto}
+.col{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:10px;min-height:120px}
+.col h4{margin:0 0 8px;font-size:12px;text-transform:uppercase;color:var(--muted);font-weight:500;display:flex;justify-content:space-between}
+.deal{border:1px solid var(--line);border-radius:8px;padding:8px;margin-bottom:8px;background:var(--bg);font-size:13px}
+.deal .v{font-weight:600}
+.deal select{margin-top:6px;font-size:12px;padding:3px}
+
+.form-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:0 14px}
+.lines td{padding:4px}
+.lines input,.lines select{padding:5px 6px}
+dialog{border:1px solid var(--line);border-radius:14px;background:var(--panel);color:var(--ink);
+  width:min(880px,calc(100vw - 32px));padding:20px}
+dialog::backdrop{background:#0006}
+.dlg-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.dlg-head h2{margin:0;font-size:17px}
+.actions{display:flex;gap:8px;justify-content:flex-end;margin-top:14px;flex-wrap:wrap}
+.toast{position:fixed;bottom:18px;right:18px;background:var(--ink);color:var(--bg);padding:10px 14px;border-radius:8px;
+  opacity:0;transform:translateY(8px);transition:.25s;max-width:360px;z-index:50}
+.toast.show{opacity:1;transform:none}
+.toast.bad{background:var(--bad);color:#fff}
+.empty{color:var(--muted);padding:12px 0}
+
+@media (max-width:760px){
+  .shell{grid-template-columns:1fr}
+  .side{position:static;height:auto;flex-direction:row;flex-wrap:wrap;align-items:center;padding:10px 16px}
+  #nav{flex-direction:row;flex-wrap:wrap;width:100%}
+  .side-foot{margin:0;display:flex;align-items:center;gap:8px}
+  .main{padding:16px}
+}
+
+
+/* demo additions */
+:root{--banner:#0f6b5c}
+.demo-banner{background:var(--accent-soft);color:var(--accent);font-size:12px;padding:6px 16px;text-align:center;border-bottom:1px solid var(--line)}
+.quick{display:grid;gap:6px;margin-top:16px;border-top:1px solid var(--line);padding-top:12px}
+.quick p{margin:0 0 4px;font-size:12px}
+.qbtn{text-align:left;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:8px;padding:8px 10px;display:grid;gap:2px}
+.qbtn:hover{border-color:var(--accent)} .qbtn span{font-size:12px;color:var(--muted)}
+.qbtn:focus-visible,.btn:focus-visible,#nav a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.sim{border:1px dashed #ffffff33;border-radius:8px;padding:10px;display:grid;gap:6px}
+.sim-h{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:#fff}
+.sim-n{font-size:11px;color:#9aa0a0}
+.sim .btn{background:#ffffff14;color:#fff;border-color:#ffffff22;text-align:left}
+.login-card{width:min(420px,100%)}
+html,body{background:var(--bg)}
+@media (max-width:760px){.sim{width:100%}}
+
+:root[data-theme="dark"]{--bg:#121415;--panel:#1b1e20;--ink:#e8e9e6;--muted:#9a9e9f;--line:#2b2f31;--accent:#4fb39f;--accent-soft:#16302b;--warn:#e08a4f;--warn-soft:#33241a;--bad:#ef7b72;--bad-soft:#3a1d1b;--side:#0c0e0f;--side-ink:#c9ccc8;color-scheme:dark}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark}}
+</style>
+<div class="demo-banner">Demo verzija: podaci su primer i ostaju samo u ovom prozoru. Osvežavanje stranice vraća početno stanje.</div>
+
+<div id="login" class="login hidden">
+  <form id="loginForm" class="login-card">
+    <div class="brand"><span class="mark"></span>CENTROGROUP</div>
+    <p class="muted">Interna platforma grupe</p>
+    <label>Email<input name="email" type="email" autocomplete="username" required></label>
+    <label>Lozinka<input name="password" type="password" autocomplete="current-password" required></label>
+    <button class="btn primary" type="submit">Prijava</button>
+    <p id="loginErr" class="err"></p>
+  </form>
+</div>
+
+<div id="app" class="shell hidden">
+  <aside class="side">
+    <div class="brand"><span class="mark"></span>CENTROGROUP</div>
+    <nav id="nav"></nav>
+    <div class="side-foot">
+      <div id="who" class="who"></div>
+      <button class="btn ghost small" id="logout">Odjava</button>
+    </div>
+  </aside>
+  <main class="main">
+    <header class="top">
+      <h1 id="title">Moj ekran</h1>
+      <div class="top-right">
+        <span id="live" class="live off" title="Izveštaji se osvežavaju čim neko proknjiži dokument">● uživo</span>
+        <span id="stamp" class="muted mono"></span>
+      </div>
+    </header>
+    <section id="view"></section>
+  </main>
+</div>
+<div id="toast" class="toast"></div>
+<dialog id="dlg"><div id="dlgBody"></div></dialog>
+
+<script>/* In-browser demo server: same API and same business rules as the Python backend
+   (app/main.py + app/services.py), so the real frontend runs unchanged in a single page. */
+(function () {
+  "use strict";
+  const r2 = x => Math.round(x * 100) / 100, r3 = x => Math.round(x * 1000) / 1000;
+  const todayISO = () => new Date().toISOString().slice(0, 10);
+  const nowISO = () => new Date().toISOString();
+  const DOC_LABEL = { RECEIPT: "Prijemnica", DELIVERY: "Otpremnica", TRANSFER: "Međufirmeni prenos", PRODUCTION: "Proizvodnja", ADJUST: "Korekcija" };
+  const PREFIX = { RECEIPT: "PRI", DELIVERY: "OTP", TRANSFER: "MFP", PRODUCTION: "PRO", ADJUST: "KOR" };
+  const STAGES = ["lead", "kvalifikovan", "ponuda", "pregovori", "dobijen", "izgubljen"];
+  const MODULES = ["dashboard", "crm", "tasks", "inventory", "documents", "production", "reports", "admin"];
+  const ROLES = {
+    management: { dashboard: ["view"], crm: ["view", "edit"], tasks: ["view", "edit"], inventory: ["view"], documents: ["view", "edit", "post"], production: ["view"], reports: ["view"] },
+    sales: { dashboard: ["view"], crm: ["view", "edit"], tasks: ["view", "edit"], inventory: ["view"], documents: ["view", "edit"], reports: ["view"] },
+    warehouse: { dashboard: ["view"], tasks: ["view", "edit"], inventory: ["view"], documents: ["view", "edit", "post"] },
+    production: { dashboard: ["view"], tasks: ["view", "edit"], inventory: ["view"], documents: ["view", "edit", "post"], production: ["view", "edit"] },
+    finance: { dashboard: ["view"], tasks: ["view", "edit"], inventory: ["view"], documents: ["view"], reports: ["view"] },
+    viewer: { dashboard: ["view"], inventory: ["view"], reports: ["view"] },
+    admin: Object.fromEntries(MODULES.map(m => [m, ["view", "edit", "post"]])),
+  };
+  const DOC_TYPES_BY_ROLE = {
+    management: ["RECEIPT", "DELIVERY", "TRANSFER", "PRODUCTION", "ADJUST"], sales: ["DELIVERY"],
+    warehouse: ["RECEIPT", "DELIVERY", "TRANSFER", "ADJUST"], production: ["PRODUCTION"],
+    admin: ["RECEIPT", "DELIVERY", "TRANSFER", "PRODUCTION", "ADJUST"],
+  };
+
+  class HttpError extends Error { constructor(s, m) { super(m); this.status = s; } }
+  class BizError extends HttpError { constructor(m) { super(422, m); } }
+
+  /* ---------- data ---------- */
+  const DB = { companies: [], users: [], grants: [], items: [], icd: [], partners: [], warehouses: [], documents: [], moves: [], deals: [], projects: [], tasks: [], audit: [] };
+  const seq = {};
+  const nid = t => (seq[t] = (seq[t] || 0) + 1);
+  const add = (t, o) => { o.id = nid(t); DB[t].push(o); return o; };
+  const get = (t, id) => DB[t].find(x => x.id === +id);
+
+  function audit(user_id, company_id, action, entity, entity_id, detail = "") {
+    add("audit", { user_id, company_id, action, entity, entity_id, detail, created_at: new Date() });
+  }
+
+  /* ---------- permissions ---------- */
+  const grantsOf = u => DB.grants.filter(g => g.user_id === u.id);
+  function can(u, cid, mod, act = "view") {
+    if (u.is_superadmin) return true;
+    return grantsOf(u).some(g => (cid == null || g.company_id === cid) && (ROLES[g.role]?.[mod] || []).includes(act));
+  }
+  function scope(u, mod, act = "view") {
+    if (u.is_superadmin) return null;
+    return [...new Set(grantsOf(u).filter(g => (ROLES[g.role]?.[mod] || []).includes(act)).map(g => g.company_id))];
+  }
+  const inScope = (cid, ids) => ids === null || ids.includes(cid);
+  const menuFor = u => u.is_superadmin ? MODULES : MODULES.filter(m => grantsOf(u).some(g => ROLES[g.role]?.[m]));
+  const canCreateDoc = (u, cid, t) => u.is_superadmin || grantsOf(u).some(g => g.company_id === cid && (DOC_TYPES_BY_ROLE[g.role] || []).includes(t));
+  function require(u, cid, mod, act) { if (!can(u, cid, mod, act)) throw new HttpError(403, "Nemate ovlašćenje za ovu radnju u ovoj firmi"); }
+
+  /* ---------- stock ledger ---------- */
+  const movesWhere = (wh, item, lot) => DB.moves.filter(m => m.warehouse_id === wh && m.item_id === item && (lot == null || m.lot === lot));
+  const available = (wh, item, lot) => r3(movesWhere(wh, item, lot).reduce((s, m) => s + m.qty, 0));
+  function avgCost(wh, item, lot) {
+    const ms = movesWhere(wh, item, lot), q = ms.reduce((s, m) => s + m.qty, 0), v = ms.reduce((s, m) => s + m.value, 0);
+    return q > 0 ? v / q : 0;
+  }
+  function lotsFifo(wh, item) {
+    const by = new Map();
+    movesWhere(wh, item, null).forEach(m => { const e = by.get(m.lot) || { q: 0, first: m.id }; e.q += m.qty; by.set(m.lot, e); });
+    return [...by.entries()].sort((a, b) => a[1].first - b[1].first).filter(([, e]) => e.q > 1e-9).map(([l, e]) => [l, r3(e.q)]);
+  }
+  const move = (doc, cid, wh, item, lot, qty, value, kind) =>
+    add("moves", { document_id: doc.id, company_id: cid, warehouse_id: wh, item_id: item, lot: lot || "", qty: r3(qty), value: r2(value), move_kind: kind, created_at: new Date() });
+
+  function take(doc, wh, cid, item, qty, lot, kind) {
+    const taken = [];
+    if (lot || !item.lot_tracked) {
+      const key = (lot || item.lot_tracked) ? lot : null, have = available(wh, item.id, key);
+      if (have < qty - 1e-9) throw new BizError(`Nema dovoljno: ${item.sku} ${item.name}${lot ? " lot " + lot : ""} — stanje ${have}, traženo ${qty}`);
+      taken.push([lot, qty]);
+    } else {
+      let need = qty;
+      for (const [l, bal] of lotsFifo(wh, item.id)) { const t = Math.min(bal, need); taken.push([l, t]); need = r3(need - t); if (need <= 0) break; }
+      if (need > 0) throw new BizError(`Nema dovoljno: ${item.sku} ${item.name} — nedostaje ${need} ${item.unit}`);
+    }
+    return taken.map(([l, t]) => {
+      const v = r2(t * avgCost(wh, item.id, (l || item.lot_tracked) ? l : null));
+      move(doc, cid, wh, item.id, l, -t, -v, kind);
+      return [l, t, v];
+    });
+  }
+
+  function postDocument(doc, uid) {
+    if (doc.status !== "draft") throw new BizError("Dokument je već proknjižen ili storniran");
+    if (!doc.lines.length) throw new BizError("Dokument nema stavki");
+    const snapshot = DB.moves.length;
+    try {
+      const mains = doc.lines.filter(l => l.role === "main");
+      if (doc.doc_type === "PRODUCTION" && !mains.length) throw new BizError("Proizvodnja mora imati bar jedan gotov proizvod");
+      const mainQty = mains.filter(l => !l.unit_price).reduce((s, l) => s + l.qty, 0) || 1;
+      let consumed = 0;
+      const lines = [...doc.lines].sort((a, b) => (a.role === "main") - (b.role === "main"));
+      for (const ln of lines) {
+        const item = get("items", ln.item_id), qty = +ln.qty;
+        if (doc.doc_type !== "ADJUST" && qty <= 0) throw new BizError(`Količina mora biti pozitivna (${item.sku})`);
+        switch (doc.doc_type) {
+          case "RECEIPT":
+            if (item.lot_tracked && !ln.lot) throw new BizError(`Unesite lot za ${item.sku} (artikal se prati po lotu)`);
+            move(doc, doc.company_id, doc.warehouse_id, item.id, ln.lot, qty, qty * ln.unit_price, "receipt"); break;
+          case "DELIVERY":
+            if (!doc.partner_id) throw new BizError("Otpremnica mora imati kupca");
+            take(doc, doc.warehouse_id, doc.company_id, item, qty, ln.lot, "delivery"); break;
+          case "TRANSFER": {
+            const tgt = get("warehouses", doc.target_warehouse_id);
+            for (const [l, t, v] of take(doc, doc.warehouse_id, doc.company_id, item, qty, ln.lot, "transfer_out"))
+              move(doc, tgt.company_id, tgt.id, item.id, l, t, ln.unit_price ? t * ln.unit_price : v, "transfer_in");
+            break;
+          }
+          case "PRODUCTION":
+            if (ln.role === "main") {
+              if (item.lot_tracked && !ln.lot) ln.lot = `L${doc.doc_date.slice(2).replace(/-/g, "")}-${String(doc.id).padStart(4, "0")}-${ln.id}`;
+              const val = ln.unit_price ? qty * ln.unit_price : consumed * qty / mainQty;
+              move(doc, doc.company_id, doc.target_warehouse_id || doc.warehouse_id, item.id, ln.lot, qty, val, "production_out");
+            } else {
+              consumed += take(doc, doc.warehouse_id, doc.company_id, item, qty, ln.lot, ln.role === "scrap" ? "scrap" : "consumption").reduce((s, x) => s + x[2], 0);
+            }
+            break;
+          case "ADJUST":
+            if (qty >= 0) move(doc, doc.company_id, doc.warehouse_id, item.id, ln.lot, qty, qty * ln.unit_price, "adjust");
+            else take(doc, doc.warehouse_id, doc.company_id, item, -qty, ln.lot, "adjust");
+        }
+      }
+    } catch (e) { DB.moves.length = snapshot; throw e; }
+    doc.status = "posted"; doc.posted_at = new Date(); doc.posted_by = uid;
+    audit(uid, doc.company_id, "post", "document", doc.id, doc.number);
+  }
+
+  function cancelDocument(doc, uid, reason) {
+    if (doc.status !== "posted") throw new BizError("Stornirati se može samo proknjižen dokument");
+    const ms = DB.moves.filter(m => m.document_id === doc.id);
+    for (const m of ms) if (m.qty > 0 && available(m.warehouse_id, m.item_id, m.lot) < m.qty - 1e-9)
+      throw new BizError(`Storno nije moguć: roba ${get("items", m.item_id).sku} lot '${m.lot}' je već izašla iz magacina`);
+    ms.forEach(m => move(doc, m.company_id, m.warehouse_id, m.item_id, m.lot, -m.qty, -m.value, "storno"));
+    doc.status = "cancelled"; doc.note = (doc.note + "\nSTORNO: " + reason).trim();
+    audit(uid, doc.company_id, "cancel", "document", doc.id, reason);
+  }
+
+  function nextNumber(type, company, date) {
+    const p = `${PREFIX[type]}-${company.code}-${date.slice(0, 4)}-`;
+    const n = DB.documents.filter(d => d.number.startsWith(p)).length + 1;
+    return p + String(n).padStart(5, "0");
+  }
+
+  function createDoc(u, b) {
+    const wh = get("warehouses", b.warehouse_id), company = get("companies", b.company_id);
+    const date = b.doc_date || todayISO();
+    const d = add("documents", {
+      doc_type: b.doc_type, company_id: b.company_id, warehouse_id: wh.id, target_warehouse_id: b.target_warehouse_id || null,
+      target_company_id: b.target_warehouse_id && b.doc_type === "TRANSFER" ? get("warehouses", b.target_warehouse_id).company_id : null,
+      partner_id: b.partner_id || null, doc_date: date, status: "draft", note: b.note || "", external_ref: b.external_ref || "",
+      created_by: u.id, created_at: new Date(), posted_at: null, number: nextNumber(b.doc_type, company, date), lines: [],
+    });
+    let lid = 0;
+    d.lines = b.lines.map(l => ({ id: ++lid, item_id: +l.item_id, qty: +l.qty, unit_price: +l.unit_price || 0, lot: l.lot || "", role: l.role || "main" }));
+    audit(u.id, d.company_id, "create", "document", d.id, d.number);
+    return d;
+  }
+
+  function docOut(d) {
+    const wh = get("warehouses", d.warehouse_id), twh = d.target_warehouse_id ? get("warehouses", d.target_warehouse_id) : null;
+    const comp = c => get("companies", c).code;
+    return {
+      id: d.id, number: d.number, doc_type: d.doc_type, label: DOC_LABEL[d.doc_type], company: comp(wh.company_id), company_id: d.company_id,
+      warehouse: wh.name, target: twh ? `${comp(twh.company_id)} / ${twh.name}` : null,
+      partner: d.partner_id ? get("partners", d.partner_id).name : null, doc_date: d.doc_date, status: d.status, note: d.note,
+      external_ref: d.external_ref, created_by: get("users", d.created_by)?.full_name || "",
+      posted_at: d.posted_at ? d.posted_at.toISOString() : null,
+      lines: d.lines.map(l => { const it = get("items", l.item_id); return { sku: it.sku, name: it.name, unit: it.unit, qty: l.qty, unit_price: l.unit_price, lot: l.lot, role: l.role, value: r2(l.qty * l.unit_price) }; }),
+      total: r2(d.lines.filter(l => l.role === "main").reduce((s, l) => s + l.qty * l.unit_price, 0)),
+    };
+  }
+
+  function stock(u, cid, byLot) {
+    const ids = scope(u, "inventory"), agg = new Map();
+    DB.moves.forEach(m => {
+      if (!inScope(m.company_id, ids) || (cid && m.company_id !== cid)) return;
+      const k = [m.company_id, m.warehouse_id, m.item_id, byLot ? m.lot : ""].join("|");
+      const e = agg.get(k) || { cid: m.company_id, wid: m.warehouse_id, iid: m.item_id, lot: byLot ? m.lot : null, q: 0, v: 0 };
+      e.q += m.qty; e.v += m.value; agg.set(k, e);
+    });
+    const out = [];
+    agg.forEach(e => {
+      if (Math.abs(e.q) < 1e-9) return;
+      const it = get("items", e.iid), w = get("warehouses", e.wid);
+      const min = DB.icd.find(x => x.item_id === e.iid && x.company_id === e.cid)?.min_stock || 0;
+      out.push({ company: get("companies", w.company_id).code, company_id: e.cid, warehouse: w.name, warehouse_id: e.wid, item_id: e.iid, sku: it.sku, name: it.name, unit: it.unit, lot: e.lot, qty: r3(e.q), value: r2(e.v), min_stock: min, below_min: e.q < min });
+    });
+    return out.sort((a, b) => (a.company + a.warehouse + a.sku + (a.lot || "")).localeCompare(b.company + b.warehouse + b.sku + (b.lot || "")));
+  }
+
+  function dashboard(u) {
+    const out = { generated_at: nowISO(), blocks: {} }, b = out.blocks, today = todayISO();
+    const code = id => get("companies", id).code, since = new Date(); since.setHours(0, 0, 0, 0);
+    const my = DB.tasks.filter(t => t.assignee_id === u.id && t.status !== "done");
+    b.my_tasks = { open: my.length, overdue: my.filter(t => t.due && t.due < today).length, due_today: my.filter(t => t.due === today).length };
+    const inv = scope(u, "inventory");
+    if (inv === null || inv.length) {
+      const by = {}; DB.moves.filter(m => inScope(m.company_id, inv)).forEach(m => by[m.company_id] = (by[m.company_id] || 0) + m.value);
+      b.stock_value = Object.entries(by).map(([c, v]) => ({ company: code(+c), value: r2(v) }));
+      b.low_stock = stock(u, null, false).filter(r => r.below_min).slice(0, 20);
+    }
+    const docs = scope(u, "documents");
+    if (docs === null || docs.length) {
+      const posted = DB.documents.filter(d => d.status === "posted" && d.posted_at >= since && inScope(d.company_id, docs));
+      const cnt = {}; posted.forEach(d => { const k = d.doc_type + "|" + d.company_id; cnt[k] = (cnt[k] || 0) + 1; });
+      b.docs_today = Object.entries(cnt).map(([k, n]) => { const [t, c] = k.split("|"); return { type: DOC_LABEL[t], company: code(+c), count: n }; });
+      const del = {}; posted.filter(d => d.doc_type === "DELIVERY").forEach(d => del[d.company_id] = (del[d.company_id] || 0) + d.lines.reduce((s, l) => s + l.qty * l.unit_price, 0));
+      b.deliveries_today = Object.entries(del).map(([c, v]) => ({ company: code(+c), value: r2(v) }));
+      b.recent_docs = DB.documents.filter(d => d.status !== "draft" && (inScope(d.company_id, docs) || (d.target_company_id && inScope(d.target_company_id, docs))))
+        .sort((a, b) => b.posted_at - a.posted_at).slice(0, 8)
+        .map(d => ({ id: d.id, number: d.number, label: DOC_LABEL[d.doc_type], company: code(d.company_id), status: d.status, time: d.posted_at ? d.posted_at.toLocaleString("sr-RS", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" }) : "" }));
+      b.drafts = DB.documents.filter(d => d.status === "draft" && inScope(d.company_id, docs)).length;
+    }
+    const crm = scope(u, "crm");
+    if (crm === null || crm.length) {
+      const ds = DB.deals.filter(d => inScope(d.company_id, crm));
+      b.pipeline = STAGES.map(s => { const x = ds.filter(d => d.stage === s); return { stage: s, count: x.length, value: r2(x.reduce((a, d) => a + d.value, 0)) }; });
+    }
+    if (u.is_superadmin || grantsOf(u).some(g => ["management", "admin"].includes(g.role))) {
+      const tsk = scope(u, "tasks"), by = {};
+      DB.tasks.filter(t => t.status !== "done" && t.due && t.due < today && inScope(t.company_id, tsk)).forEach(t => by[t.assignee_id] = (by[t.assignee_id] || 0) + 1);
+      b.team_overdue = Object.entries(by).map(([uid, n]) => ({ user: get("users", +uid).full_name, count: n }));
+    }
+    if (can(u, null, "production")) {
+      const prod = scope(u, "production"), since7 = new Date(since - 6 * 864e5), k = {};
+      DB.moves.forEach(m => {
+        const d = get("documents", m.document_id);
+        if (d.doc_type === "PRODUCTION" && d.posted_at >= since7 && inScope(m.company_id, prod) && ["production_out", "consumption", "scrap"].includes(m.move_kind))
+          k[m.move_kind] = (k[m.move_kind] || 0) + m.qty;
+      });
+      const o = Math.abs(k.production_out || 0), c = Math.abs(k.consumption || 0), s = Math.abs(k.scrap || 0);
+      b.production_7d = { output: o, consumed: c, scrap: s, scrap_pct: c + s ? Math.round(1000 * s / (c + s)) / 10 : 0 };
+    }
+    return out;
+  }
+
+  /* ---------- events (stand-in for Server-Sent Events) ---------- */
+  const listeners = new Set();
+  function publish(kind, companies, payload = {}) {
+    const data = JSON.stringify({ kind, companies, ...payload });
+    setTimeout(() => listeners.forEach(fn => fn(data)), 50);
+  }
+  class FakeEventSource {
+    constructor() { this.h = {}; this.fn = d => this.h.change?.forEach(f => f({ data: d })); listeners.add(this.fn); setTimeout(() => this.h.hello?.forEach(f => f({ data: "{}" })), 30); }
+    addEventListener(t, f) { (this.h[t] = this.h[t] || []).push(f); }
+    close() { listeners.delete(this.fn); }
+  }
+  window.EventSource = FakeEventSource;
+
+  /* ---------- routing ---------- */
+  const tokens = new Map();
+  function auth(headers) {
+    const t = (headers.Authorization || "").replace("Bearer ", "");
+    const u = tokens.get(t);
+    if (!u || !u.active) throw new HttpError(401, "Niste prijavljeni");
+    return u;
+  }
+
+  const routes = [];
+  const R = (method, pattern, fn) => routes.push({ method, re: new RegExp("^" + pattern.replace(/\{(\w+)\}/g, "(?<$1>[^/]+)") + "$"), fn });
+
+  R("POST", "/api/login", ({ body }) => {
+    const u = DB.users.find(x => x.email === String(body.email).trim().toLowerCase());
+    if (!u || !u.active || u.password !== body.password) throw new HttpError(401, "Pogrešan email ili lozinka");
+    const t = "demo-" + Math.random().toString(36).slice(2); tokens.set(t, u);
+    audit(u.id, null, "login", "user", u.id);
+    return { token: t };
+  });
+  R("GET", "/api/me", ({ u }) => ({
+    id: u.id, email: u.email, full_name: u.full_name, is_superadmin: u.is_superadmin,
+    grants: grantsOf(u).map(g => ({ company_id: g.company_id, company: get("companies", g.company_id).code, role: g.role })),
+    menu: menuFor(u),
+    doc_types: u.is_superadmin ? Object.keys(DOC_LABEL).sort() : [...new Set(grantsOf(u).flatMap(g => DOC_TYPES_BY_ROLE[g.role] || []))].sort(),
+    doc_rights: grantsOf(u).map(g => ({ company_id: g.company_id, types: DOC_TYPES_BY_ROLE[g.role] || [], can_post: (ROLES[g.role]?.documents || []).includes("post") })),
+  }));
+  R("GET", "/api/companies", () => DB.companies.map(c => ({ id: c.id, code: c.code, name: c.name, role_in_group: c.role_in_group })));
+  R("GET", "/api/warehouses", () => DB.warehouses.map(w => ({ id: w.id, code: w.code, name: w.name, company_id: w.company_id, company: get("companies", w.company_id).code })));
+  R("GET", "/api/items", ({ q }) => DB.items.filter(i => i.active && (!q.q || (i.sku + i.name).toLowerCase().includes(q.q.toLowerCase())))
+    .sort((a, b) => a.sku.localeCompare(b.sku)).map(({ id, sku, name, unit, category, lot_tracked }) => ({ id, sku, name, unit, category, lot_tracked })));
+  R("POST", "/api/items", ({ u, body }) => {
+    if (!(u.is_superadmin || grantsOf(u).some(g => ["admin", "management"].includes(g.role)))) throw new HttpError(403, "Šifarnik menja samo administrator ili menadžment");
+    if (DB.items.some(i => i.sku === body.sku)) throw new HttpError(409, "Šifra već postoji");
+    const it = add("items", { sku: body.sku, name: body.name, unit: body.unit || "kom", category: body.category || "", lot_tracked: !!body.lot_tracked, active: true });
+    audit(u.id, null, "create", "item", it.id, it.sku); return { id: it.id };
+  });
+  R("GET", "/api/partners", () => [...DB.partners].sort((a, b) => a.name.localeCompare(b.name)).map(({ id, name, pib, kind, city }) => ({ id, name, pib, kind, city })));
+  R("POST", "/api/partners", ({ u, body }) => {
+    if (!(u.is_superadmin || grantsOf(u).some(g => ["admin", "management", "sales"].includes(g.role)))) throw new HttpError(403, "Nemate ovlašćenje");
+    const p = add("partners", { name: body.name, pib: body.pib || "", kind: body.kind || "kupac", city: body.city || "" });
+    audit(u.id, null, "create", "partner", p.id, p.name); return { id: p.id };
+  });
+  R("GET", "/api/users", () => DB.users.filter(x => x.active).sort((a, b) => a.full_name.localeCompare(b.full_name))
+    .map(x => ({ id: x.id, full_name: x.full_name, email: x.email, grants: grantsOf(x).map(g => ({ company: get("companies", g.company_id).code, role: g.role })) })));
+  R("POST", "/api/users", ({ u, body }) => {
+    if (!(u.is_superadmin || grantsOf(u).some(g => g.role === "admin"))) throw new HttpError(403, "Korisnike dodaje samo administrator");
+    if ((body.password || "").length < 8) throw new HttpError(422, "Lozinka mora imati bar 8 znakova");
+    const n = add("users", { email: body.email.toLowerCase(), full_name: body.full_name, password: body.password, active: true, is_superadmin: false });
+    body.grants.forEach(g => add("grants", { user_id: n.id, company_id: +g.company_id, role: g.role }));
+    audit(u.id, null, "create", "user", n.id, n.email); return { id: n.id };
+  });
+
+  R("POST", "/api/documents", ({ u, body }) => {
+    if (!DOC_LABEL[body.doc_type]) throw new HttpError(422, "Nepoznat tip dokumenta");
+    const wh = get("warehouses", body.warehouse_id);
+    if (!wh || wh.company_id !== body.company_id) throw new HttpError(422, "Magacin ne pripada izabranoj firmi");
+    if (!canCreateDoc(u, body.company_id, body.doc_type)) throw new HttpError(403, `Nemate pravo da izdate dokument '${DOC_LABEL[body.doc_type]}' za ovu firmu`);
+    if (body.doc_type === "TRANSFER") {
+      const t = get("warehouses", body.target_warehouse_id);
+      if (!t) throw new HttpError(422, "Izaberite odredišni magacin");
+      if (t.id === wh.id) throw new HttpError(422, "Izvorni i odredišni magacin su isti");
+    } else if (body.doc_type === "PRODUCTION" && body.target_warehouse_id) {
+      if (get("warehouses", body.target_warehouse_id).company_id !== body.company_id) throw new HttpError(422, "Magacin gotovih proizvoda mora pripadati istoj firmi");
+    } else body.target_warehouse_id = null;
+    if (body.post) require(u, body.company_id, "documents", "post");
+    const d = createDoc(u, body);
+    if (body.post) {
+      try { postDocument(d, u.id); }
+      catch (e) { DB.documents.pop(); throw e; }
+      publish("document", [d.company_id, d.target_company_id].filter(Boolean), { number: d.number });
+    }
+    return docOut(d);
+  });
+  R("POST", "/api/documents/{id}/post", ({ u, p }) => {
+    const d = get("documents", p.id); if (!d) throw new HttpError(404, "Nema dokumenta");
+    require(u, d.company_id, "documents", "post"); postDocument(d, u.id);
+    publish("document", [d.company_id, d.target_company_id].filter(Boolean), { number: d.number }); return docOut(d);
+  });
+  R("POST", "/api/documents/{id}/cancel", ({ u, p, body }) => {
+    const d = get("documents", p.id); if (!d) throw new HttpError(404, "Nema dokumenta");
+    if (!body.reason || body.reason.length < 3) throw new HttpError(422, "Unesite razlog storniranja");
+    require(u, d.company_id, "documents", "post"); cancelDocument(d, u.id, body.reason);
+    publish("document", [d.company_id, d.target_company_id].filter(Boolean), { number: d.number }); return docOut(d);
+  });
+  R("GET", "/api/documents", ({ u, q }) => {
+    const ids = scope(u, "documents");
+    return DB.documents.filter(d => (inScope(d.company_id, ids) || (d.target_company_id && inScope(d.target_company_id, ids)))
+      && (!q.doc_type || d.doc_type === q.doc_type) && (!q.status || d.status === q.status))
+      .sort((a, b) => b.id - a.id).slice(0, +(q.limit || 100)).map(docOut);
+  });
+  R("GET", "/api/documents/{id}", ({ u, p }) => {
+    const d = get("documents", p.id); if (!d) throw new HttpError(404, "Nema dokumenta");
+    if (!(can(u, d.company_id, "documents") || (d.target_company_id && can(u, d.target_company_id, "documents")))) throw new HttpError(403, "Nemate pristup");
+    return docOut(d);
+  });
+  R("GET", "/api/stock", ({ u, q }) => stock(u, q.company_id ? +q.company_id : null, q.by_lot === "true"));
+  R("GET", "/api/trace/{lot}", ({ u, p }) => {
+    const ids = scope(u, "inventory"), lot = decodeURIComponent(p.lot);
+    return DB.moves.filter(m => m.lot === lot && inScope(m.company_id, ids)).map(m => {
+      const d = get("documents", m.document_id), w = get("warehouses", m.warehouse_id);
+      return { date: d.doc_date, number: d.number, label: DOC_LABEL[d.doc_type], kind: m.move_kind, company: get("companies", w.company_id).code, warehouse: w.name, sku: get("items", m.item_id).sku, qty: m.qty, partner: m.move_kind === "delivery" && d.partner_id ? get("partners", d.partner_id).name : null };
+    });
+  });
+  R("GET", "/api/deals", ({ u }) => {
+    const ids = scope(u, "crm");
+    return DB.deals.filter(d => inScope(d.company_id, ids)).sort((a, b) => b.updated_at - a.updated_at).map(d => ({
+      id: d.id, company: get("companies", d.company_id).code, company_id: d.company_id, partner: get("partners", d.partner_id).name, title: d.title, stage: d.stage,
+      value: d.value, currency: d.currency, owner: get("users", d.owner_id)?.full_name, owner_id: d.owner_id, expected_close: d.expected_close }));
+  });
+  R("POST", "/api/deals", ({ u, body }) => {
+    require(u, body.company_id, "crm", "edit");
+    if (!STAGES.includes(body.stage || "lead")) throw new HttpError(422, "Nepoznata faza");
+    const d = add("deals", { company_id: body.company_id, partner_id: body.partner_id, title: body.title, stage: body.stage || "lead", value: +body.value || 0, currency: body.currency || "EUR", owner_id: body.owner_id || u.id, expected_close: body.expected_close || null, updated_at: new Date() });
+    audit(u.id, d.company_id, "create", "deal", d.id, d.title); publish("deal", [d.company_id]); return { id: d.id };
+  });
+  R("PATCH", "/api/deals/{id}", ({ u, p, body }) => {
+    const d = get("deals", p.id); if (!d) throw new HttpError(404, "Nema posla");
+    require(u, d.company_id, "crm", "edit");
+    if (!STAGES.includes(body.stage)) throw new HttpError(422, "Nepoznata faza");
+    audit(u.id, d.company_id, "stage", "deal", d.id, `${d.stage} -> ${body.stage}`);
+    d.stage = body.stage; d.updated_at = new Date(); publish("deal", [d.company_id]); return { ok: true };
+  });
+  R("GET", "/api/tasks", ({ u, q }) => {
+    const ids = scope(u, "tasks"), today = todayISO();
+    return DB.tasks.filter(t => q.mine === "true" ? t.assignee_id === u.id : (inScope(t.company_id, ids) || t.assignee_id === u.id || t.created_by === u.id))
+      .sort((a, b) => a.status.localeCompare(b.status) || (a.due || "9").localeCompare(b.due || "9"))
+      .map(t => ({ id: t.id, company: get("companies", t.company_id).code, title: t.title, description: t.description, assignee: get("users", t.assignee_id)?.full_name, assignee_id: t.assignee_id,
+        created_by: get("users", t.created_by)?.full_name, project: t.project_id ? get("projects", t.project_id).name : null, due: t.due, status: t.status, priority: t.priority,
+        overdue: !!(t.due && t.due < today && t.status !== "done") }));
+  });
+  R("POST", "/api/tasks", ({ u, body }) => {
+    require(u, body.company_id, "tasks", "edit");
+    const t = add("tasks", { company_id: body.company_id, title: body.title, description: body.description || "", assignee_id: body.assignee_id, created_by: u.id, due: body.due || null, status: "open", priority: body.priority || "normal", project_id: body.project_id || null });
+    audit(u.id, t.company_id, "create", "task", t.id, t.title); publish("task", [t.company_id], { assignee_id: t.assignee_id }); return { id: t.id };
+  });
+  R("PATCH", "/api/tasks/{id}", ({ u, p, body }) => {
+    const t = get("tasks", p.id); if (!t) throw new HttpError(404, "Nema zadatka");
+    if (t.assignee_id !== u.id && !can(u, t.company_id, "tasks", "edit")) throw new HttpError(403, "Nemate ovlašćenje");
+    t.status = body.status; audit(u.id, t.company_id, "status", "task", t.id, body.status);
+    publish("task", [t.company_id], { assignee_id: t.assignee_id }); return { ok: true };
+  });
+  R("GET", "/api/dashboard", ({ u }) => dashboard(u));
+  R("GET", "/api/audit", ({ u, q }) => {
+    if (!(u.is_superadmin || grantsOf(u).some(g => ["admin", "management"].includes(g.role)))) throw new HttpError(403, "Nemate pristup");
+    return [...DB.audit].reverse().slice(0, +(q.limit || 100)).map(a => ({ time: a.created_at.toLocaleString("sr-RS"), user: a.user_id ? get("users", a.user_id)?.full_name : null, action: a.action, entity: a.entity, detail: a.detail }));
+  });
+
+  const realFetch = window.fetch.bind(window);
+  window.fetch = async (input, opts = {}) => {
+    const url = new URL(typeof input === "string" ? input : input.url, location.href);
+    if (!url.pathname.startsWith("/api/")) return realFetch(input, opts);
+    const method = (opts.method || "GET").toUpperCase(), headers = opts.headers || {};
+    const body = opts.body ? JSON.parse(opts.body) : {}, q = Object.fromEntries(url.searchParams);
+    await new Promise(r => setTimeout(r, 25));
+    const json = (status, obj) => new Response(JSON.stringify(obj), { status, headers: { "Content-Type": "application/json" } });
+    for (const rt of routes) {
+      if (rt.method !== method) continue;
+      const m = url.pathname.match(rt.re); if (!m) continue;
+      try {
+        const u = url.pathname === "/api/login" ? null : auth(headers);
+        return json(200, rt.fn({ u, body, q, p: m.groups || {} }));
+      } catch (e) {
+        if (e instanceof HttpError) return json(e.status, { detail: e.message });
+        console.error(e); return json(500, { detail: "Greška u demo serveru: " + e.message });
+      }
+    }
+    return json(404, { detail: "Nepoznata ruta " + url.pathname });
+  };
+
+  /* ---------- seed: same as app/seed.py --demo-flow ---------- */
+  function seed() {
+    const C = {};
+    [["CGROUP", "CENTROGROUP", "Centralna prodaja, nabavka, odobrenja, monitoring računovodstva, izveštaji grupe"],
+     ["CPACK", "CENTROPACK", "Trgovina, narudžbine, zalihe, skladišta, centralni transport i logistika"],
+     ["CPLAST", "CENTROPLAST", "Proizvodnja, normativi, radni nalozi, utrošak sirovine, škart, lotovi, mašine, WMS"],
+     ["CPAPIR", "CENTROPAPIR", "Proizvodnja kesa i drugih proizvoda, sopstveni normativi, nalozi i zalihe"]]
+      .forEach(([code, name, role]) => C[code] = add("companies", { code, name, role_in_group: role }));
+    const W = {};
+    [["CP-GL", "CPACK", "Centropack — glavni magacin"], ["CP-SA", "CPACK", "Centropack — Šabac"], ["PL-SIR", "CPLAST", "Centroplast — sirovine"],
+     ["PL-GP", "CPLAST", "Centroplast — gotovi proizvodi"], ["PA-GL", "CPAPIR", "Centropapir — magacin"]]
+      .forEach(([code, c, name]) => W[code] = add("warehouses", { code, name, company_id: C[c].id }));
+    const I = {};
+    [["SIR-PET-001", "PET granulat (DEMO)", "kg", "sirovina", true], ["SIR-RPET-001", "rPET flakes (DEMO)", "kg", "sirovina", true],
+     ["SIR-PAP-001", "Papir rolna 80 g/m² (DEMO)", "kg", "sirovina", true], ["GP-POS-500", "PET posuda 500 ml (DEMO)", "kom", "gotov proizvod", true],
+     ["GP-POS-1000", "PET posuda 1000 ml (DEMO)", "kom", "gotov proizvod", true], ["GP-KESA-M", "Papirna kesa M (DEMO)", "kom", "gotov proizvod", true],
+     ["AMB-KUT-01", "Transportna kutija (DEMO)", "kom", "ambalaža", false]]
+      .forEach(([sku, name, unit, category, lot]) => I[sku] = add("items", { sku, name, unit, category, lot_tracked: lot, active: true }));
+    [["GP-POS-500", "CPACK", 20000], ["GP-POS-1000", "CPACK", 10000], ["GP-KESA-M", "CPACK", 5000], ["SIR-PET-001", "CPLAST", 5000], ["SIR-PAP-001", "CPAPIR", 2000]]
+      .forEach(([s, c, mn]) => add("icd", { item_id: I[s].id, company_id: C[c].id, min_stock: mn }));
+    const P = {};
+    [["Kupac Alfa DOO (DEMO)", "kupac", "Beograd"], ["Kupac Beta DOO (DEMO)", "kupac", "Novi Sad"], ["Dobavljač Granulat (DEMO)", "dobavljac", "Istanbul"]]
+      .forEach(([name, kind, city]) => P[name] = add("partners", { name, kind, city, pib: "" }));
+    const U = {};
+    const user = (k, email, name, grants) => { U[k] = add("users", { email, full_name: name, password: "Centro2026!", active: true, is_superadmin: false }); grants.forEach(([c, r]) => add("grants", { user_id: U[k].id, company_id: C[c].id, role: r })); };
+    user("dragan", "dragan@centrogroup.test", "Dragan Vidaković", [["CGROUP", "admin"], ["CPACK", "management"], ["CPLAST", "management"], ["CPAPIR", "management"]]);
+    user("menadzer", "menadzer@centrogroup.test", "Menadžer prodaje (DEMO)", [["CGROUP", "sales"], ["CPACK", "sales"], ["CPLAST", "viewer"]]);
+    user("magacin", "magacin@centrogroup.test", "Magacioner Centropack (DEMO)", [["CPACK", "warehouse"]]);
+    user("proizvodnja", "proizvodnja@centrogroup.test", "Šef proizvodnje Centroplast (DEMO)", [["CPLAST", "production"], ["CPLAST", "warehouse"]]);
+    user("finansije", "finansije@centrogroup.test", "Finansije grupe (DEMO)", [["CGROUP", "finance"], ["CPACK", "finance"], ["CPLAST", "finance"], ["CPAPIR", "finance"]]);
+    const pr = add("projects", { company_id: C.CGROUP.id, name: "Uvođenje platforme", owner_id: U.dragan.id, status: "active" });
+    const day = n => { const d = new Date(); d.setDate(d.getDate() + n); return d.toISOString().slice(0, 10); };
+    [["Pripremiti stvarni šifarnik artikala", "dragan", "CGROUP", 3], ["Popis zaliha Centropack — početno stanje", "magacin", "CPACK", 5],
+     ["Uneti normative za PET posude", "proizvodnja", "CPLAST", -1], ["Pozvati Kupca Alfa za novu ponudu", "menadzer", "CPACK", 0]]
+      .forEach(([title, who, c, d]) => add("tasks", { company_id: C[c].id, project_id: pr.id, title, description: "", assignee_id: U[who].id, created_by: U.dragan.id, due: day(d), status: "open", priority: "normal" }));
+    [["CPACK", "Kupac Alfa DOO (DEMO)", "Posude 500 ml — godišnji ugovor", "ponuda", 48000], ["CPACK", "Kupac Beta DOO (DEMO)", "Papirne kese — sezonska porudžbina", "pregovori", 12500],
+     ["CGROUP", "Kupac Beta DOO (DEMO)", "Posude 1000 ml — novi kupac", "lead", 20000]]
+      .forEach(([c, p, title, stage, value]) => add("deals", { company_id: C[c].id, partner_id: P[p].id, title, stage, value, currency: "EUR", owner_id: U.menadzer.id, expected_close: day(30), updated_at: new Date() }));
+    const doc = (who, type, comp, wh, lines, extra = {}) => {
+      const d = createDoc(U[who], { doc_type: type, company_id: C[comp].id, warehouse_id: W[wh].id, lines, ...extra });
+      if (d.doc_type === "TRANSFER") d.target_company_id = get("warehouses", d.target_warehouse_id).company_id;
+      postDocument(d, U[who].id); return d;
+    };
+    doc("proizvodnja", "RECEIPT", "CPLAST", "PL-SIR", [{ item_id: I["SIR-PET-001"].id, qty: 12000, unit_price: 1.35, lot: "PET-2026-0412" }], { partner_id: P["Dobavljač Granulat (DEMO)"].id });
+    const prod = doc("proizvodnja", "PRODUCTION", "CPLAST", "PL-SIR", [
+      { item_id: I["GP-POS-500"].id, qty: 180000, role: "main" }, { item_id: I["SIR-PET-001"].id, qty: 5600, unit_price: 1.35, role: "consume" },
+      { item_id: I["SIR-PET-001"].id, qty: 220, unit_price: 1.35, role: "scrap" }], { target_warehouse_id: W["PL-GP"].id });
+    const lot = prod.lines.find(l => l.role === "main").lot;
+    doc("dragan", "TRANSFER", "CPLAST", "PL-GP", [{ item_id: I["GP-POS-500"].id, qty: 150000, lot }], { target_warehouse_id: W["CP-GL"].id });
+    doc("magacin", "DELIVERY", "CPACK", "CP-GL", [{ item_id: I["GP-POS-500"].id, qty: 120000, unit_price: 0.12 }], { partner_id: P["Kupac Alfa DOO (DEMO)"].id, external_ref: "ERP-FAK-DEMO-001" });
+    DB.audit.length = 0;
+  }
+  seed();
+
+  /* ---------- demo hooks: act as another user, to show live refresh ---------- */
+  window.DEMO = {
+    users: () => DB.users.map(u => ({ email: u.email, name: u.full_name, roles: grantsOf(u).map(g => get("companies", g.company_id).code + " · " + g.role) })),
+    asOther(email, fn) { const u = DB.users.find(x => x.email === email); const t = "demo-other-" + u.id; tokens.set(t, u); return fn(t); },
+  };
+})();
+</script>
+<script>/* Demo-only UI: one-click login per role and a panel that acts as another user,
+   so the live refresh can be seen without a second computer. */
+(function () {
+  "use strict";
+  const ROLE_TXT = {
+    "dragan@centrogroup.test": ["Dragan Vidaković", "Administrator grupe, menadžment u sve tri firme"],
+    "menadzer@centrogroup.test": ["Menadžer prodaje", "Prodaja CENTROGROUP i CENTROPACK, pregled CENTROPLAST"],
+    "magacin@centrogroup.test": ["Magacioner", "Samo CENTROPACK magacin"],
+    "proizvodnja@centrogroup.test": ["Šef proizvodnje", "CENTROPLAST proizvodnja i magacin"],
+    "finansije@centrogroup.test": ["Finansije", "Pregled svih firmi, bez knjiženja"],
+  };
+  const card = document.querySelector(".login-card");
+  card.insertAdjacentHTML("beforeend", `<div class="quick"><p class="muted">Demo: uđite kao jedna od uloga</p>${
+    Object.entries(ROLE_TXT).map(([e, [n, d]]) => `<button type="button" class="qbtn" data-e="${e}"><b>${n}</b><span>${d}</span></button>`).join("")}</div>`);
+  card.querySelectorAll(".qbtn").forEach(b => b.onclick = () => {
+    card.querySelector("[name=email]").value = b.dataset.e;
+    card.querySelector("[name=password]").value = "Centro2026!";
+    card.requestSubmit();
+  });
+
+  const side = document.querySelector(".side-foot");
+  side.insertAdjacentHTML("beforebegin", `<div class="sim">
+    <div class="sim-h">Simulacija drugog korisnika</div>
+    <button type="button" class="btn small" id="simDel">Magacioner knjiži otpremnicu</button>
+    <button type="button" class="btn small" id="simProd">Proizvodnja knjiži nalog</button>
+    <button type="button" class="btn small" id="simDeal">Prodaja pomera posao</button>
+    <div class="sim-n">Gledajte kako se ekran sam osvežava.</div></div>`);
+
+  async function as(email, path, body, method = "POST") {
+    return window.DEMO.asOther(email, async t => {
+      const r = await fetch(path, { method, headers: { "Content-Type": "application/json", Authorization: "Bearer " + t }, body: JSON.stringify(body) });
+      const d = await r.json(); if (!r.ok) throw new Error(d.detail); return d;
+    });
+  }
+  const showErr = e => { const t = document.getElementById("toast"); t.textContent = e.message; t.className = "toast show bad"; setTimeout(() => t.className = "toast", 3500); };
+  const ids = async () => {
+    const tok = window.DEMO.asOther("dragan@centrogroup.test", t => t);
+    const h = { Authorization: "Bearer " + tok };
+    const [items, wh, partners] = await Promise.all(["/api/items", "/api/warehouses", "/api/partners"].map(p => fetch(p, { headers: h }).then(r => r.json())));
+    return { item: s => items.find(i => i.sku === s).id, wh: c => wh.find(w => w.code === c).id, partner: n => partners.find(p => p.name.startsWith(n)).id };
+  };
+  document.getElementById("simDel").onclick = async () => {
+    try {
+      const x = await ids(), q = 1000 + Math.round(Math.random() * 4) * 500;
+      await as("magacin@centrogroup.test", "/api/documents", { doc_type: "DELIVERY", company_id: 2, warehouse_id: x.wh("CP-GL"), partner_id: x.partner("Kupac Beta"),
+        lines: [{ item_id: x.item("GP-POS-500"), qty: q, unit_price: 0.12 }], post: true });
+    } catch (e) { showErr(e); }
+  };
+  document.getElementById("simProd").onclick = async () => {
+    try {
+      const x = await ids();
+      await as("proizvodnja@centrogroup.test", "/api/documents", { doc_type: "PRODUCTION", company_id: 3, warehouse_id: x.wh("PL-SIR"), target_warehouse_id: x.wh("PL-GP"),
+        lines: [{ item_id: x.item("GP-POS-500"), qty: 20000, role: "main" }, { item_id: x.item("SIR-PET-001"), qty: 620, role: "consume" }, { item_id: x.item("SIR-PET-001"), qty: 25, role: "scrap" }], post: true });
+    } catch (e) { showErr(e); }
+  };
+  document.getElementById("simDeal").onclick = async () => {
+    try {
+      const deals = await window.DEMO.asOther("menadzer@centrogroup.test", t => fetch("/api/deals", { headers: { Authorization: "Bearer " + t } }).then(r => r.json()));
+      const order = ["lead", "kvalifikovan", "ponuda", "pregovori", "dobijen"];
+      const d = deals.find(d => order.indexOf(d.stage) >= 0 && d.stage !== "dobijen");
+      if (!d) throw new Error("Svi poslovi su već dobijeni");
+      await as("menadzer@centrogroup.test", "/api/deals/" + d.id, { stage: order[order.indexOf(d.stage) + 1] }, "PATCH");
+    } catch (e) { showErr(e); }
+  };
+})();
+</script>
+<script>"use strict";
+const S = { token: null, me: null, view: "dashboard", ref: {}, es: null };
+try { S.token = localStorage.getItem("cg_token"); } catch (e) {}
+
+const $ = (s, r = document) => r.querySelector(s);
+const esc = v => String(v ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const fmt = (n, d = 0) => Number(n || 0).toLocaleString("sr-RS", { minimumFractionDigits: d, maximumFractionDigits: d });
+const money = n => fmt(n, 2);
+
+const NAV = {
+  dashboard: "Moj ekran", tasks: "Zadaci", documents: "Dokumenti", inventory: "Zalihe",
+  crm: "CRM", production: "Proizvodnja", reports: "Izveštaji grupe", admin: "Administracija",
+};
+const DOC = { RECEIPT: "Prijemnica", DELIVERY: "Otpremnica", TRANSFER: "Međufirmeni prenos", PRODUCTION: "Proizvodnja", ADJUST: "Korekcija" };
+const STAGES = ["lead", "kvalifikovan", "ponuda", "pregovori", "dobijen", "izgubljen"];
+const ROLE_LABEL = { admin: "administrator", management: "menadžment", sales: "prodaja", warehouse: "magacin", production: "proizvodnja", finance: "finansije", viewer: "pregled" };
+
+async function api(path, opts = {}) {
+  const r = await fetch(path, {
+    ...opts, headers: { "Content-Type": "application/json", Authorization: "Bearer " + S.token, ...(opts.headers || {}) },
+    body: opts.body ? JSON.stringify(opts.body) : undefined,
+  });
+  if (r.status === 401) { logout(); throw new Error("Sesija je istekla"); }
+  const data = await r.json().catch(() => ({}));
+  if (!r.ok) {
+    let d = data.detail;
+    if (Array.isArray(d)) d = d.map(x => x.msg).join("; ");
+    throw new Error(d || "Greška " + r.status);
+  }
+  return data;
+}
+
+function toast(msg, bad = false) {
+  const t = $("#toast"); t.textContent = msg; t.className = "toast show" + (bad ? " bad" : "");
+  clearTimeout(t._h); t._h = setTimeout(() => t.className = "toast", 3200);
+}
+
+/* ---------- auth ---------- */
+$("#loginForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  const f = new FormData(e.target);
+  try {
+    const r = await fetch("/api/login", { method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: f.get("email"), password: f.get("password") }) });
+    const d = await r.json();
+    if (!r.ok) throw new Error(d.detail);
+    S.token = d.token; try { localStorage.setItem("cg_token", d.token); } catch (e) {}
+    boot();
+  } catch (err) { $("#loginErr").textContent = err.message; }
+});
+$("#logout").onclick = () => logout();
+function logout() {
+  S.token = null; try { localStorage.removeItem("cg_token"); } catch (e) {}
+  if (S.es) S.es.close();
+  $("#app").classList.add("hidden"); $("#login").classList.remove("hidden");
+}
+
+async function boot() {
+  if (!S.token) return logout();
+  try { S.me = await api("/api/me"); } catch (e) { return; }
+  const [companies, warehouses, items, partners, users] = await Promise.all(
+    ["/api/companies", "/api/warehouses", "/api/items", "/api/partners", "/api/users"].map(p => api(p)));
+  Object.assign(S.ref, { companies, warehouses, items, partners, users });
+  $("#login").classList.add("hidden"); $("#app").classList.remove("hidden");
+  const roles = S.me.is_superadmin ? "superadmin" :
+    [...new Set(S.me.grants.map(g => `${g.company} · ${ROLE_LABEL[g.role] || g.role}`))].join("<br>");
+  $("#who").innerHTML = `<b>${esc(S.me.full_name)}</b><span class="muted">${roles}</span>`;
+  renderNav(); go(location.hash.slice(1) || "dashboard"); connectLive();
+}
+
+function renderNav() {
+  const menu = S.me.menu.filter(m => NAV[m]);
+  $("#nav").innerHTML = menu.map(m => `<a href="#${m}" data-v="${m}">${NAV[m]}<span class="badge hidden" id="b-${m}"></span></a>`).join("");
+}
+window.addEventListener("hashchange", () => S.me && go(location.hash.slice(1)));
+function go(v) {
+  if (!S.me.menu.includes(v)) v = "dashboard";
+  S.view = v;
+  document.querySelectorAll("#nav a").forEach(a => a.classList.toggle("on", a.dataset.v === v));
+  $("#title").textContent = NAV[v];
+  render();
+}
+async function render(changed) {
+  try { await VIEWS[S.view](changed); $("#stamp").textContent = "osveženo " + new Date().toLocaleTimeString("sr-RS"); }
+  catch (e) { toast(e.message, true); }
+}
+
+/* ---------- live ---------- */
+function connectLive() {
+  if (S.es) S.es.close();
+  const es = new EventSource("/api/stream?token=" + encodeURIComponent(S.token));
+  S.es = es;
+  es.addEventListener("hello", () => $("#live").classList.remove("off"));
+  es.addEventListener("change", ev => {
+    const m = JSON.parse(ev.data);
+    const live = $("#live"); live.classList.remove("pulse"); void live.offsetWidth; live.classList.add("pulse");
+    if (m.kind === "task" && m.assignee_id === S.me.id) toast("Imate izmenu u zadacima");
+    if (m.kind === "document" && m.number) toast("Proknjiženo: " + m.number);
+    render(true);
+  });
+  es.onerror = () => { $("#live").classList.add("off"); };
+}
+
+/* ---------- helpers ---------- */
+const companyName = id => (S.ref.companies.find(c => c.id === id) || {}).name || "";
+const myCompanies = (types) => {
+  if (S.me.is_superadmin) return S.ref.companies;
+  const ids = new Set(S.me.doc_rights.filter(r => !types || r.types.length).map(r => r.company_id));
+  return S.ref.companies.filter(c => ids.has(c.id));
+};
+const opt = (list, val, lab, sel) => list.map(x => `<option value="${x[val]}" ${x[val] == sel ? "selected" : ""}>${esc(lab(x))}</option>`).join("");
+function table(cols, rows, onclick) {
+  if (!rows.length) return `<div class="empty">Nema podataka.</div>`;
+  return `<div class="tbl-wrap"><table><thead><tr>${cols.map(c => `<th class="${c.n ? "n" : ""}">${c.h}</th>`).join("")}</tr></thead><tbody>${
+    rows.map((r, i) => `<tr ${onclick ? `class="click" data-i="${i}"` : ""}>${cols.map(c => `<td class="${c.n ? "n" : ""}">${c.f ? c.f(r) : esc(r[c.k])}</td>`).join("")}</tr>`).join("")
+  }</tbody></table></div>`;
+}
+function bindRows(el, rows, fn) { el.querySelectorAll("tr.click").forEach(tr => tr.onclick = () => fn(rows[+tr.dataset.i])); }
+const statusPill = s => `<span class="pill ${s}">${{ posted: "proknjižen", draft: "nacrt", cancelled: "storniran" }[s] || s}</span>`;
+
+/* ---------- views ---------- */
+const VIEWS = {};
+
+VIEWS.dashboard = async (changed) => {
+  const d = await api("/api/dashboard"), b = d.blocks, v = $("#view");
+  const cards = [];
+  const mt = b.my_tasks;
+  cards.push(`<div class="card"><h3>Moji zadaci</h3><div class="kpis">
+    <div class="kpi">${mt.open}<br><small>otvoreno</small></div>
+    <div class="kpi" style="color:${mt.overdue ? "var(--bad)" : "inherit"}">${mt.overdue}<br><small>kasni</small></div>
+    <div class="kpi">${mt.due_today}<br><small>danas</small></div></div>
+    <p><a href="#tasks">Otvori zadatke →</a></p></div>`);
+  if (b.deliveries_today) {
+    const tot = b.deliveries_today.reduce((s, x) => s + x.value, 0);
+    cards.push(`<div class="card"><h3>Otpremljeno danas (prodajna vrednost)</h3><div class="kpi">${money(tot)}</div>
+      ${b.deliveries_today.map(x => `<div class="muted">${x.company}: ${money(x.value)}</div>`).join("")}</div>`);
+  }
+  if (b.stock_value) {
+    const tot = b.stock_value.reduce((s, x) => s + x.value, 0);
+    cards.push(`<div class="card"><h3>Vrednost zaliha (nabavna)</h3><div class="kpi">${money(tot)}</div>
+      ${b.stock_value.map(x => `<div class="muted">${x.company}: ${money(x.value)}</div>`).join("")}</div>`);
+  }
+  if (b.production_7d) {
+    const p = b.production_7d;
+    cards.push(`<div class="card"><h3>Proizvodnja — 7 dana</h3><div class="kpis">
+      <div class="kpi">${fmt(p.output)}<br><small>proizvedeno</small></div>
+      <div class="kpi" style="color:${p.scrap_pct > 5 ? "var(--bad)" : "inherit"}">${fmt(p.scrap_pct, 1)}%<br><small>škart</small></div></div>
+      <div class="muted">Utrošeno ${fmt(p.consumed)} · škart ${fmt(p.scrap)}</div></div>`);
+  }
+  if (b.pipeline) {
+    const open = b.pipeline.filter(x => !["dobijen", "izgubljen"].includes(x.stage));
+    const max = Math.max(1, ...open.map(x => x.value));
+    cards.push(`<div class="card"><h3>Prodajni levak (otvoreno)</h3><div class="bars">${open.map(x =>
+      `<div><span>${x.stage} (${x.count})</span><span class="bar" style="width:${100 * x.value / max}%"></span><span class="mono" style="text-align:right">${money(x.value)}</span></div>`).join("")}</div></div>`);
+  }
+  if (b.team_overdue) {
+    cards.push(`<div class="card"><h3>Kašnjenja po ljudima</h3>${b.team_overdue.length ?
+      b.team_overdue.map(x => `<div>${esc(x.user)} — <b style="color:var(--bad)">${x.count}</b></div>`).join("") : `<div class="empty">Niko ne kasni.</div>`}</div>`);
+  }
+  if (b.recent_docs) {
+    cards.push(`<div class="card wide"><h3>Poslednji dokumenti ${b.drafts ? `· <span class="pill draft">${b.drafts} nacrta čeka knjiženje</span>` : ""}</h3>
+      ${table([{ h: "Broj", f: r => `<span class="mono">${esc(r.number)}</span>` }, { h: "Vrsta", k: "label" }, { h: "Firma", k: "company" },
+               { h: "Status", f: r => statusPill(r.status) }, { h: "Vreme", k: "time" }], b.recent_docs, true)}</div>`);
+  }
+  if (b.low_stock && b.low_stock.length) {
+    cards.push(`<div class="card wide"><h3>Ispod minimalne zalihe</h3>${table([{ h: "Firma", k: "company" }, { h: "Šifra", k: "sku" }, { h: "Naziv", k: "name" },
+      { h: "Stanje", n: 1, f: r => fmt(r.qty) }, { h: "Minimum", n: 1, f: r => fmt(r.min_stock) }], b.low_stock)}</div>`);
+  }
+  v.innerHTML = `<div class="grid">${cards.join("")}</div>`;
+  if (changed) v.querySelectorAll(".card").forEach(c => c.classList.add("flash"));
+  if (b.recent_docs) bindRows(v, b.recent_docs, r => openDoc(r.id));
+};
+
+VIEWS.tasks = async () => {
+  const mine = S.taskMine ?? true;
+  const rows = await api("/api/tasks" + (mine ? "?mine=true" : ""));
+  const canAssign = S.me.is_superadmin || S.me.grants.some(g => ["admin", "management", "sales", "warehouse", "production", "finance"].includes(g.role));
+  $("#view").innerHTML = `<div class="toolbar">
+      <select id="tm"><option value="1" ${mine ? "selected" : ""}>Samo moji</option><option value="0" ${!mine ? "selected" : ""}>Svi koje vidim</option></select>
+      ${canAssign ? `<button class="btn primary" id="newTask">+ Novi zadatak</button>` : ""}</div>
+    <div class="card">${table([
+      { h: "Zadatak", f: r => `<b>${esc(r.title)}</b>${r.project ? `<div class="muted">${esc(r.project)}</div>` : ""}` },
+      { h: "Firma", k: "company" }, { h: "Zadužen", k: "assignee" },
+      { h: "Rok", f: r => r.due ? `${new Date(r.due).toLocaleDateString("sr-RS")} ${r.overdue ? `<span class="pill overdue">kasni</span>` : ""}` : "—" },
+      { h: "Status", f: r => `<select data-t="${r.id}">${[["open", "otvoren"], ["in_progress", "u radu"], ["done", "završen"]].map(([k, l]) => `<option value="${k}" ${r.status === k ? "selected" : ""}>${l}</option>`).join("")}</select>` },
+    ], rows)}</div>`;
+  $("#tm").onchange = e => { S.taskMine = e.target.value === "1"; render(); };
+  document.querySelectorAll("[data-t]").forEach(s => s.onchange = async () => {
+    try { await api(`/api/tasks/${s.dataset.t}`, { method: "PATCH", body: { status: s.value } }); toast("Status sačuvan"); } catch (e) { toast(e.message, true); render(); }
+  });
+  if ($("#newTask")) $("#newTask").onclick = () => taskDialog();
+};
+
+function taskDialog() {
+  const comps = S.me.is_superadmin ? S.ref.companies : S.ref.companies.filter(c => S.me.grants.some(g => g.company_id === c.id && g.role !== "viewer"));
+  dialog("Novi zadatak", `<div class="form-grid">
+    <label>Naslov<input name="title" required></label>
+    <label>Firma<select name="company_id">${opt(comps, "id", c => c.name)}</select></label>
+    <label>Zadužen<select name="assignee_id">${opt(S.ref.users, "id", u => u.full_name, S.me.id)}</select></label>
+    <label>Rok<input name="due" type="date"></label>
+    <label>Prioritet<select name="priority"><option value="normal">normalan</option><option value="high">visok</option></select></label></div>
+    <label>Opis<textarea name="description" rows="3"></textarea></label>`,
+    async f => { await api("/api/tasks", { method: "POST", body: { ...f, company_id: +f.company_id, assignee_id: +f.assignee_id, due: f.due || null } }); toast("Zadatak dodat"); });
+}
+
+VIEWS.documents = async () => {
+  const t = S.docType || "";
+  const rows = await api("/api/documents" + (t ? "?doc_type=" + t : ""));
+  const types = S.me.doc_types || [];
+  $("#view").innerHTML = `<div class="toolbar">
+      <select id="dt"><option value="">Svi dokumenti</option>${Object.entries(DOC).map(([k, l]) => `<option value="${k}" ${k === t ? "selected" : ""}>${l}</option>`).join("")}</select>
+      ${types.map(k => `<button class="btn ${k === "DELIVERY" || k === "RECEIPT" ? "primary" : ""}" data-new="${k}">+ ${DOC[k]}</button>`).join("")}</div>
+    <div class="card">${table([
+      { h: "Broj", f: r => `<span class="mono">${esc(r.number)}</span>` }, { h: "Vrsta", k: "label" }, { h: "Datum", f: r => new Date(r.doc_date).toLocaleDateString("sr-RS") },
+      { h: "Firma / magacin", f: r => `${esc(r.company)} · ${esc(r.warehouse)}${r.target ? `<div class="muted">→ ${esc(r.target)}</div>` : ""}` },
+      { h: "Partner", f: r => esc(r.partner || "—") }, { h: "Vrednost", n: 1, f: r => money(r.total) },
+      { h: "Status", f: r => statusPill(r.status) }], rows, true)}</div>`;
+  $("#dt").onchange = e => { S.docType = e.target.value; render(); };
+  bindRows($("#view"), rows, r => openDoc(r.id));
+  document.querySelectorAll("[data-new]").forEach(b => b.onclick = () => docDialog(b.dataset.new));
+};
+
+function docDialog(type) {
+  const rights = S.me.is_superadmin ? S.ref.companies.map(c => ({ company_id: c.id, types: Object.keys(DOC), can_post: true })) : S.me.doc_rights;
+  const comps = S.ref.companies.filter(c => rights.some(r => r.company_id === c.id && r.types.includes(type)));
+  const whOpts = cid => opt(S.ref.warehouses.filter(w => w.company_id == cid), "id", w => w.name);
+  const needPartner = type === "DELIVERY" || type === "RECEIPT";
+  const lineRow = () => `<tr>
+    <td><select name="item_id" required><option value="">— artikal —</option>${opt(S.ref.items, "id", i => `${i.sku} — ${i.name}`)}</select></td>
+    <td><input name="qty" type="number" step="any" min="0" placeholder="0"></td>
+    <td><input name="unit_price" type="number" step="any" min="0" placeholder="${type === "DELIVERY" ? "prodajna" : "cena"}"></td>
+    <td><input name="lot" placeholder="${type === "RECEIPT" ? "obavezno za lot" : "auto / FIFO"}"></td>
+    ${type === "PRODUCTION" ? `<td><select name="role"><option value="consume">utrošak</option><option value="main">gotov proizvod</option><option value="scrap">škart</option></select></td>` : ""}
+    <td><button type="button" class="btn ghost small rm">×</button></td></tr>`;
+  dialog(DOC[type], `<div class="form-grid">
+      <label>Firma<select name="company_id" id="dc">${opt(comps, "id", c => c.name)}</select></label>
+      <label>${type === "PRODUCTION" ? "Magacin sirovina" : type === "RECEIPT" ? "U magacin" : "Iz magacina"}<select name="warehouse_id" id="dw"></select></label>
+      ${type === "TRANSFER" ? `<label>Odredište (firma / magacin)<select name="target_warehouse_id">${opt(S.ref.warehouses, "id", w => `${w.company} — ${w.name}`)}</select></label>` : ""}
+      ${type === "PRODUCTION" ? `<label>Magacin gotovih proizvoda<select name="target_warehouse_id" id="dtw"></select></label>` : ""}
+      ${needPartner ? `<label>${type === "DELIVERY" ? "Kupac" : "Dobavljač"}<select name="partner_id">${opt(S.ref.partners.filter(p => p.kind === "oba" || p.kind === (type === "DELIVERY" ? "kupac" : "dobavljac")), "id", p => p.name)}</select></label>` : ""}
+      <label>Datum<input name="doc_date" type="date" value="${new Date().toISOString().slice(0, 10)}"></label>
+      ${type === "DELIVERY" ? `<label>Broj fakture u ERP-u<input name="external_ref" placeholder="opciono"></label>` : ""}</div>
+    <table class="lines"><thead><tr><th>Artikal</th><th>Količina</th><th>Cena</th><th>Lot</th>${type === "PRODUCTION" ? "<th>Uloga</th>" : ""}<th></th></tr></thead>
+      <tbody id="ln">${lineRow()}${type === "PRODUCTION" ? lineRow() : ""}</tbody></table>
+    <button type="button" class="btn small" id="addLn">+ stavka</button>
+    <label style="margin-top:10px">Napomena<textarea name="note" rows="2"></textarea></label>
+    ${type === "TRANSFER" ? `<p class="muted">Prenos menja vlasnika robe: izlazi iz zaliha izvorne firme, ulazi u zalihe odredišne, lot ide sa robom.</p>` : ""}`,
+    async (f, form, post) => {
+      const lines = [...form.querySelectorAll("#ln tr")].map(tr => ({
+        item_id: +tr.querySelector("[name=item_id]").value, qty: +tr.querySelector("[name=qty]").value || 0,
+        unit_price: +tr.querySelector("[name=unit_price]").value || 0, lot: tr.querySelector("[name=lot]").value.trim(),
+        role: tr.querySelector("[name=role]")?.value || "main" })).filter(l => l.qty && l.item_id);
+      if (!lines.length) throw new Error("Unesite bar jednu stavku sa količinom");
+      const body = { doc_type: type, company_id: +f.company_id, warehouse_id: +f.warehouse_id, doc_date: f.doc_date,
+        target_warehouse_id: f.target_warehouse_id ? +f.target_warehouse_id : null, partner_id: f.partner_id ? +f.partner_id : null,
+        note: f.note || "", external_ref: f.external_ref || "", lines, post };
+      const d = await api("/api/documents", { method: "POST", body });
+      toast(`${d.number} ${post ? "proknjižen" : "sačuvan kao nacrt"}`);
+    }, [["Sačuvaj nacrt", false], ["Proknjiži", true]]);
+  const setWh = () => {
+    $("#dw").innerHTML = whOpts($("#dc").value);
+    if ($("#dtw")) $("#dtw").innerHTML = whOpts($("#dc").value);
+  };
+  $("#dc").onchange = setWh; setWh();
+  $("#addLn").onclick = () => $("#ln").insertAdjacentHTML("beforeend", lineRow());
+  $("#ln").onclick = e => { if (e.target.classList.contains("rm") && $("#ln").children.length > 1) e.target.closest("tr").remove(); };
+}
+
+async function openDoc(id) {
+  const d = await api("/api/documents/" + id);
+  const right = S.me.is_superadmin || S.me.doc_rights.some(r => r.company_id === d.company_id && r.can_post);
+  const btns = [];
+  if (right && d.status === "draft") btns.push(`<button class="btn primary" id="dPost">Proknjiži</button>`);
+  if (right && d.status === "posted") btns.push(`<button class="btn danger" id="dCancel">Storniraj</button>`);
+  if (!window.DEMO) btns.push(`<button class="btn" id="dPrint">Štampaj</button>`);
+  $("#dlgBody").innerHTML = `<div class="dlg-head"><h2>${esc(d.label)} <span class="mono">${esc(d.number)}</span></h2>${statusPill(d.status)}</div>
+    <div class="form-grid">
+      <div><span class="muted">Firma / magacin</span><br>${esc(d.company)} · ${esc(d.warehouse)}</div>
+      ${d.target ? `<div><span class="muted">Odredište</span><br>${esc(d.target)}</div>` : ""}
+      ${d.partner ? `<div><span class="muted">Partner</span><br>${esc(d.partner)}</div>` : ""}
+      <div><span class="muted">Datum</span><br>${new Date(d.doc_date).toLocaleDateString("sr-RS")}</div>
+      <div><span class="muted">Izdao</span><br>${esc(d.created_by)}</div>
+      ${d.external_ref ? `<div><span class="muted">ERP faktura</span><br>${esc(d.external_ref)}</div>` : ""}</div><br>
+    ${table([{ h: "Šifra", k: "sku" }, { h: "Naziv", k: "name" }, { h: "Lot", f: r => `<span class="mono">${esc(r.lot || "—")}</span>` },
+      { h: "Uloga", f: r => ({ main: "", consume: "utrošak", scrap: "škart" }[r.role]) },
+      { h: "Količina", n: 1, f: r => `${fmt(r.qty, 3)} ${esc(r.unit)}` }, { h: "Cena", n: 1, f: r => money(r.unit_price) }, { h: "Iznos", n: 1, f: r => money(r.value) }], d.lines)}
+    ${d.note ? `<p class="muted" style="white-space:pre-wrap">${esc(d.note)}</p>` : ""}
+    <div class="actions">${btns.join("")}<button class="btn ghost" id="dClose">Zatvori</button></div>`;
+  const dlg = $("#dlg"); dlg.showModal();
+  $("#dClose").onclick = () => dlg.close();
+  if ($("#dPrint")) $("#dPrint").onclick = () => printDoc(d);
+  if ($("#dPost")) $("#dPost").onclick = async () => { try { await api(`/api/documents/${id}/post`, { method: "POST" }); dlg.close(); toast("Proknjiženo"); } catch (e) { toast(e.message, true); } };
+  if ($("#dCancel")) $("#dCancel").onclick = () => {
+    if (!$("#cxBox")) {
+      $(".actions", $("#dlgBody")).insertAdjacentHTML("beforebegin",
+        `<div id="cxBox" class="toolbar"><input id="cxReason" placeholder="Razlog storniranja (obavezno)"><button class="btn danger" id="cxGo">Potvrdi storno</button></div>`);
+      $("#cxReason").focus();
+      $("#cxGo").onclick = async () => {
+        const reason = $("#cxReason").value.trim();
+        if (reason.length < 3) return toast("Upišite razlog storniranja", true);
+        try { await api(`/api/documents/${id}/cancel`, { method: "POST", body: { reason } }); dlg.close(); toast("Stornirano"); } catch (e) { toast(e.message, true); }
+      };
+    }
+  };
+}
+
+function printDoc(d) {
+  const w = window.open("", "_blank");
+  if (!w) return toast("Dozvolite iskačuće prozore za štampu", true);
+  w.document.write(`<html><head><title>${esc(d.number)}</title><style>body{font:13px system-ui;margin:32px}table{width:100%;border-collapse:collapse}td,th{border:1px solid #999;padding:6px;text-align:left}.n{text-align:right}h1{font-size:18px}.sig{margin-top:60px;display:flex;justify-content:space-between}</style></head><body>
+    <h1>${esc(companyName(d.company_id))} — ${esc(d.label)} br. ${esc(d.number)}</h1>
+    <p>Datum: ${new Date(d.doc_date).toLocaleDateString("sr-RS")} · Magacin: ${esc(d.warehouse)}${d.target ? " → " + esc(d.target) : ""}${d.partner ? " · Partner: " + esc(d.partner) : ""}${d.external_ref ? " · Faktura: " + esc(d.external_ref) : ""}</p>
+    <table><tr><th>Šifra</th><th>Naziv</th><th>Lot</th><th class="n">Količina</th><th>JM</th></tr>
+    ${d.lines.map(l => `<tr><td>${esc(l.sku)}</td><td>${esc(l.name)}</td><td>${esc(l.lot)}</td><td class="n">${fmt(l.qty, 3)}</td><td>${esc(l.unit)}</td></tr>`).join("")}</table>
+    <div class="sig"><span>Izdao: ${esc(d.created_by)} ____________</span><span>Primio: ____________</span></div></body></html>`);
+  w.document.close(); w.print();
+}
+
+VIEWS.inventory = async () => {
+  const byLot = S.byLot ?? false, cid = S.stockCo || "";
+  const rows = await api(`/api/stock?by_lot=${byLot}` + (cid ? "&company_id=" + cid : ""));
+  const q = (S.stockQ || "").toLowerCase();
+  const shown = rows.filter(r => !q || (r.sku + r.name + (r.lot || "")).toLowerCase().includes(q));
+  const tot = shown.reduce((s, r) => s + r.value, 0);
+  $("#view").innerHTML = `<div class="toolbar">
+      <select id="sc"><option value="">Sve firme</option>${opt(S.ref.companies, "id", c => c.name, cid)}</select>
+      <input id="sq" placeholder="Pretraga šifra / naziv / lot" value="${esc(S.stockQ || "")}">
+      <label style="margin:0;display:flex;gap:6px;align-items:center;color:var(--ink)"><input type="checkbox" id="sl" style="width:auto" ${byLot ? "checked" : ""}> po lotovima</label>
+      <span class="muted" style="margin-left:auto">Ukupno nabavna vrednost: <b>${money(tot)}</b></span></div>
+    <div class="card">${table([{ h: "Firma", k: "company" }, { h: "Magacin", k: "warehouse" }, { h: "Šifra", f: r => `<span class="mono">${esc(r.sku)}</span>` },
+      { h: "Naziv", k: "name" }, ...(byLot ? [{ h: "Lot", f: r => r.lot ? `<a href="#" data-lot="${esc(r.lot)}" class="mono">${esc(r.lot)}</a>` : "—" }] : []),
+      { h: "Stanje", n: 1, f: r => `${fmt(r.qty, 3)} ${esc(r.unit)} ${r.below_min ? `<span class="pill overdue">ispod min.</span>` : ""}` },
+      { h: "Vrednost", n: 1, f: r => money(r.value) }], shown)}</div>
+    <div class="card" style="margin-top:14px"><h3>Sledljivost lota</h3>
+      <div class="toolbar"><input id="lt" placeholder="Broj lota" value="${esc(S.lot || "")}"><button class="btn" id="ltb">Prati</button></div><div id="tr"></div></div>`;
+  $("#sc").onchange = e => { S.stockCo = e.target.value; render(); };
+  $("#sl").onchange = e => { S.byLot = e.target.checked; render(); };
+  $("#sq").oninput = e => { S.stockQ = e.target.value; clearTimeout(S._sq); S._sq = setTimeout(render, 250); };
+  const trace = async lot => {
+    S.lot = lot; $("#lt").value = lot;
+    const t = await api("/api/trace/" + encodeURIComponent(lot));
+    $("#tr").innerHTML = table([{ h: "Datum", k: "date" }, { h: "Dokument", f: r => `<span class="mono">${esc(r.number)}</span>` }, { h: "Vrsta", k: "label" },
+      { h: "Firma", k: "company" }, { h: "Magacin", k: "warehouse" }, { h: "Kupac", f: r => esc(r.partner || "") },
+      { h: "Količina", n: 1, f: r => `<span style="color:${r.qty < 0 ? "var(--bad)" : "var(--accent)"}">${fmt(r.qty, 3)}</span>` }], t);
+  };
+  $("#ltb").onclick = () => $("#lt").value && trace($("#lt").value.trim());
+  document.querySelectorAll("[data-lot]").forEach(a => a.onclick = e => { e.preventDefault(); trace(a.dataset.lot); });
+  if (S.lot) trace(S.lot);
+  const sq = $("#sq"); if (S.stockQ) { sq.focus(); sq.setSelectionRange(sq.value.length, sq.value.length); }
+};
+
+VIEWS.crm = async () => {
+  const deals = await api("/api/deals");
+  const canEdit = S.me.is_superadmin || S.me.grants.some(g => ["admin", "management", "sales"].includes(g.role));
+  $("#view").innerHTML = `${canEdit ? `<div class="toolbar"><button class="btn primary" id="nd">+ Nova prilika</button><button class="btn" id="np">+ Novi partner</button></div>` : ""}
+    <div class="kanban">${STAGES.map(s => {
+      const ds = deals.filter(d => d.stage === s), sum = ds.reduce((a, d) => a + d.value, 0);
+      return `<div class="col"><h4><span>${s}</span><span>${ds.length}</span></h4><div class="muted mono" style="font-size:12px;margin-bottom:8px">${money(sum)}</div>
+        ${ds.map(d => `<div class="deal"><div>${esc(d.title)}</div><div class="muted">${esc(d.partner)} · ${esc(d.company)}</div>
+          <div class="v">${money(d.value)} ${esc(d.currency)}</div><div class="muted">${esc(d.owner || "")}</div>
+          ${canEdit ? `<select data-d="${d.id}">${STAGES.map(x => `<option ${x === s ? "selected" : ""}>${x}</option>`).join("")}</select>` : ""}</div>`).join("")}</div>`;
+    }).join("")}</div>`;
+  document.querySelectorAll("[data-d]").forEach(s => s.onchange = async () => {
+    try { await api("/api/deals/" + s.dataset.d, { method: "PATCH", body: { stage: s.value } }); } catch (e) { toast(e.message, true); render(); }
+  });
+  if ($("#nd")) $("#nd").onclick = () => dialog("Nova prodajna prilika", `<div class="form-grid">
+      <label>Naziv<input name="title" required></label>
+      <label>Firma<select name="company_id">${opt(S.ref.companies, "id", c => c.name)}</select></label>
+      <label>Kupac<select name="partner_id">${opt(S.ref.partners, "id", p => p.name)}</select></label>
+      <label>Vrednost<input name="value" type="number" step="any"></label>
+      <label>Valuta<select name="currency"><option>EUR</option><option>RSD</option><option>USD</option></select></label>
+      <label>Očekivano zatvaranje<input name="expected_close" type="date"></label></div>`,
+    async f => { await api("/api/deals", { method: "POST", body: { ...f, company_id: +f.company_id, partner_id: +f.partner_id, value: +f.value || 0, expected_close: f.expected_close || null } }); toast("Prilika dodata"); });
+  if ($("#np")) $("#np").onclick = () => dialog("Novi partner", `<div class="form-grid">
+      <label>Naziv<input name="name" required></label><label>PIB<input name="pib"></label>
+      <label>Vrsta<select name="kind"><option value="kupac">kupac</option><option value="dobavljac">dobavljač</option><option value="oba">oba</option></select></label>
+      <label>Grad<input name="city"></label></div>`,
+    async f => { await api("/api/partners", { method: "POST", body: f }); S.ref.partners = await api("/api/partners"); toast("Partner dodat"); });
+};
+
+VIEWS.production = async () => {
+  const rows = await api("/api/documents?doc_type=PRODUCTION");
+  const canDo = S.me.doc_types.includes("PRODUCTION");
+  $("#view").innerHTML = `${canDo ? `<div class="toolbar"><button class="btn primary" id="np">+ Evidentiraj proizvodnju</button></div>` : ""}
+    <div class="card"><h3>Proizvodni nalozi i lotovi</h3>${table([
+      { h: "Broj", f: r => `<span class="mono">${esc(r.number)}</span>` }, { h: "Datum", f: r => new Date(r.doc_date).toLocaleDateString("sr-RS") }, { h: "Firma", k: "company" },
+      { h: "Proizvedeno", f: r => r.lines.filter(l => l.role === "main").map(l => `${esc(l.sku)} ${fmt(l.qty)} <span class="mono muted">${esc(l.lot)}</span>`).join("<br>") },
+      { h: "Utrošak", f: r => r.lines.filter(l => l.role === "consume").map(l => `${esc(l.sku)} ${fmt(l.qty, 1)}`).join("<br>") },
+      { h: "Škart", n: 1, f: r => { const s = r.lines.filter(l => l.role === "scrap").reduce((a, l) => a + l.qty, 0), c = r.lines.filter(l => l.role !== "main").reduce((a, l) => a + l.qty, 0); return c ? `${fmt(s, 1)} (${fmt(100 * s / c, 1)}%)` : "—"; } },
+      { h: "Status", f: r => statusPill(r.status) }], rows, true)}</div>`;
+  bindRows($("#view"), rows, r => openDoc(r.id));
+  if ($("#np")) $("#np").onclick = () => docDialog("PRODUCTION");
+};
+
+VIEWS.reports = async () => {
+  const [stock, d] = await Promise.all([api("/api/stock"), api("/api/dashboard")]);
+  const byCo = {};
+  stock.forEach(r => { byCo[r.company] = byCo[r.company] || { qty: 0, value: 0, items: 0 }; byCo[r.company].value += r.value; byCo[r.company].items++; });
+  const pipe = d.blocks.pipeline || [];
+  $("#view").innerHTML = `<div class="grid">
+    ${Object.entries(byCo).map(([c, x]) => `<div class="card"><h3>${c} — zalihe</h3><div class="kpi">${money(x.value)}</div><div class="muted">${x.items} stavki na stanju</div></div>`).join("")}
+    <div class="card wide"><h3>Prodajni levak grupe</h3>${table([{ h: "Faza", k: "stage" }, { h: "Broj", n: 1, k: "count" }, { h: "Vrednost", n: 1, f: r => money(r.value) }], pipe)}</div>
+    <div class="card wide"><h3>Dokumenti danas po firmi</h3>${table([{ h: "Firma", k: "company" }, { h: "Vrsta", k: "type" }, { h: "Broj", n: 1, k: "count" }], d.blocks.docs_today || [])}</div></div>`;
+};
+
+VIEWS.admin = async () => {
+  const [users, log] = await Promise.all([api("/api/users"), api("/api/audit?limit=60")]);
+  $("#view").innerHTML = `<div class="toolbar"><button class="btn primary" id="nu">+ Novi korisnik</button><button class="btn" id="ni">+ Novi artikal</button></div>
+    <div class="card"><h3>Korisnici i uloge po firmama</h3>${table([{ h: "Ime", k: "full_name" }, { h: "Email", k: "email" },
+      { h: "Uloge", f: r => r.grants.map(g => `${g.company}: ${ROLE_LABEL[g.role] || g.role}`).join("<br>") }], users)}</div>
+    <div class="card" style="margin-top:14px"><h3>Dnevnik izmena (audit)</h3>${table([{ h: "Vreme", k: "time" }, { h: "Korisnik", k: "user" }, { h: "Radnja", k: "action" }, { h: "Objekat", k: "entity" }, { h: "Detalj", k: "detail" }], log)}</div>`;
+  $("#nu").onclick = () => dialog("Novi korisnik", `<div class="form-grid">
+      <label>Ime i prezime<input name="full_name" required></label><label>Email<input name="email" type="email" required></label>
+      <label>Početna lozinka (min 8)<input name="password" type="text" minlength="8" required></label></div>
+      <h3 style="font-size:12px;color:var(--muted)">Uloga po firmi</h3><div class="form-grid">
+      ${S.ref.companies.map(c => `<label>${esc(c.name)}<select name="r_${c.id}"><option value="">— bez pristupa —</option>${Object.entries(ROLE_LABEL).map(([k, l]) => `<option value="${k}">${l}</option>`).join("")}</select></label>`).join("")}</div>`,
+    async f => {
+      const grants = S.ref.companies.filter(c => f["r_" + c.id]).map(c => ({ company_id: c.id, role: f["r_" + c.id] }));
+      await api("/api/users", { method: "POST", body: { full_name: f.full_name, email: f.email, password: f.password, grants } });
+      S.ref.users = await api("/api/users"); toast("Korisnik dodat");
+    });
+  $("#ni").onclick = () => dialog("Novi artikal u zajedničkom šifarniku", `<div class="form-grid">
+      <label>Šifra<input name="sku" required></label><label>Naziv<input name="name" required></label>
+      <label>JM<select name="unit"><option>kom</option><option>kg</option><option>m</option><option>m2</option><option>l</option></select></label>
+      <label>Kategorija<input name="category" placeholder="sirovina / gotov proizvod / ambalaža"></label>
+      <label>Prati se po lotu<select name="lot_tracked"><option value="1">da</option><option value="">ne</option></select></label></div>`,
+    async f => { await api("/api/items", { method: "POST", body: { ...f, lot_tracked: !!f.lot_tracked } }); S.ref.items = await api("/api/items"); toast("Artikal dodat"); });
+};
+
+/* ---------- generic dialog ---------- */
+function dialog(title, inner, onSubmit, buttons = [["Sačuvaj", null]]) {
+  $("#dlgBody").innerHTML = `<form id="df"><div class="dlg-head"><h2>${esc(title)}</h2></div>${inner}
+    <p class="err" id="dErr"></p><div class="actions"><button type="button" class="btn ghost" id="dX">Otkaži</button>
+    ${buttons.map(([l, v], i) => `<button type="submit" class="btn ${i === buttons.length - 1 ? "primary" : ""}" data-v="${v}">${l}</button>`).join("")}</div></form>`;
+  const dlg = $("#dlg"), form = $("#df"); dlg.showModal();
+  $("#dX").onclick = () => dlg.close();
+  form.onsubmit = async e => {
+    e.preventDefault();
+    const btn = e.submitter, f = Object.fromEntries(new FormData(form));
+    btn.disabled = true;
+    try { await onSubmit(f, form, btn?.dataset.v === "true"); dlg.close(); render(); }
+    catch (err) { $("#dErr").textContent = err.message; }
+    finally { btn.disabled = false; }
+  };
+}
+
+boot();
+</script>
+</body></html>
